@@ -6,28 +6,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const imageList = document.querySelector('.image-list');
     const imageSelector = document.getElementById('imageSelector');
   
-    showModalBtn.addEventListener('click', () => {
-      modal.style.display = 'block';
-    });
-  
-    closeModalBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-  
+    if(showModalBtn)
+    {
+      showModalBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+      });
+    }
+
+   if(closeModalBtn)
+    {
+      closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+    
+    }
+
     window.addEventListener('click', (event) => {
       if (event.target == modal) {
         modal.style.display = 'none';
       }
     });
-  
-    toggleImagesBtn.addEventListener('click', () => {
-      if (imageList.style.display === 'none') {
-        imageList.style.display = 'flex';
-      } else {
-        imageList.style.display = 'none';
+
+    if(toggleImagesBtn)
+      {
+        toggleImagesBtn.addEventListener('click', () => {
+          if (imageList.style.display === 'none') {
+            imageList.style.display = 'flex';
+          } else {
+            imageList.style.display = 'none';
+          }
+        });
       }
-    });
   
+    if(imageSelector)
+   {
     imageSelector.addEventListener('change', (event) => {
       const selectedImage = event.target.value;
       const imgElement = document.createElement('img');
@@ -37,5 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
       imgElement.style.height = '300px';
       document.body.appendChild(imgElement);
     });
+   }
+
   });
+  
   
