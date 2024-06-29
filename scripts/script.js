@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const loadAllPartials = (url) => {
     fetch(url)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
         document.getElementById('header').innerHTML = data.header;
         console.log('Header loaded');
@@ -16,13 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Content3 loaded');
 
         document.getElementById('content4').innerHTML = data.content4;
-        console.log('Content4 Loaded');
+        console.log('Content4 loaded');
         
         document.getElementById('footer').innerHTML = data.footer;
         console.log('Footer loaded');
       })
       .catch(error => console.error('Error fetching partials:', error));
   };
+
   // 只通过一次请求得到所有的模块
-  loadAllPartials('/partials/all');
+  loadAllPartials('http://localhost:3002/partials/all'); // 使用正确的服务器URL
 });
